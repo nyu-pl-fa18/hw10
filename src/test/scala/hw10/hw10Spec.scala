@@ -12,7 +12,9 @@ class hw10Spec extends FlatSpec {
   val n3 = Node(1, 3, empty, Node(2, 2, empty, empty))
   val n4 = Node(1, 1, Node(-1, 5, empty, empty), Node(2, 3, empty, empty))
   val n5 = Node(1, 1, empty, Node(2, 3, empty, empty))
-
+  val n6 = Node(12, 12, Node(8, 3, Node(5, 2, Node(3, 3, empty, empty), Node(6, 6, empty, empty)),
+    Node(10, 10, Node(9, 9, empty, empty), Node(11, 11, empty, empty))), empty)
+  
   "foldLeft" should "implement an in-order fold of the tree" in {
 
     def strictlySorted[V](t: TreeMap[V]): Boolean =
@@ -49,6 +51,12 @@ class hw10Spec extends FlatSpec {
     assert(n1 + (3 -> "5") === Map(1 -> 1, 2 -> 2, 3 -> "5"))
   }
   
+  "deleteMin" should "remove the binding with the minimal key from the map" in === {
+    assert(n1.deleteMin === ((1, 1), Map(2 -> 2)))
+    assert(n2.deleteMin === ((1, 1), Map(2 -> 2)))
+    assert(n6.deleteMin === ((3, 3), (Map(12 -> 12, 8 -> 3, 5 -> 2, 6 -> 6, 10 -> 10, 9 -> 9, 11 -> 11))))
+  }
+  
   "delete" should "remove the key and associated value from the map" in {
     assert(n1 - 1 === Map(2 -> 2))
     assert(n2 - 1 === Map(2 -> 2))
@@ -56,6 +64,7 @@ class hw10Spec extends FlatSpec {
     assert(n2 - 2 === Map(1 -> 1))
     assert(n1 - 3 === n1)
     assert(n4 - (-1) === n5)
+    assert(n6 - 8 === Map(12 -> 12, 3 -> 3, 5 -> 2, 6 -> 6, 10 -> 10, 9 -> 9, 11 -> 11))
     assert(empty - 1 === empty)
   }
   
