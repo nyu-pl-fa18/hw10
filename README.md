@@ -118,7 +118,7 @@ basic methods that every concrete map data structure needs to provide:
   exists. Otherwise, the map is returned unchanged.
 * Retrieving the value associated with a given key `key` from the map:
   if a pair `(key, value)` exists in the map, this operation returns
-  `Some(key)`, otherwise `None`.
+  `Some(value)`, otherwise `None`.
 * Obtaining an *iterator* object from the map that abstractly
   describes a traversal over all key/value pairs stored in the map.
 
